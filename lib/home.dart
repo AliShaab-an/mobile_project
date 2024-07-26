@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'workout.dart';
+import 'WorkoutPage.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});

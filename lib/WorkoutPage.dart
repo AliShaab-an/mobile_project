@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'home.dart';
+import 'exercise.dart';
 
 class Workout extends StatefulWidget {
   const Workout({super.key});
@@ -90,24 +91,45 @@ class _WorkoutState extends State<Workout> {
       ),
       Expanded(
         child: ListView.builder(
-          itemCount: workouts.length,
+          itemCount: exercise.length,
             itemBuilder: (context, index){
-            return Column(
-
+              final exercise = exercises[index];
+            return const Column(
+                children: [
+                  Row(
+                    children: [
+                      CircleAvatar(
+                        backgroundImage:Image.network(exercise.imageurl),
+                        Text(exercise.name),
+                      )
+                    ],
+                  ),
+                ],
              ),
          },
         );
       ),
-
-      Expanded(
-        child:FloatingActionButton.extended(
-          onPressed: () {},
+      Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: FloatingActionButton.extended(
+          onPressed: () {
+            // Navigate to add exercise page
+          },
           label: const Text('Add Exercise'),
           icon: Icon(Icons.add),
           backgroundColor: Colors.white60,
         ),
+      ),
 
-      )
+      // Expanded(
+      //   child:FloatingActionButton.extended(
+      //     onPressed: () {},
+      //     label: const Text('Add Exercise'),
+      //     icon: Icon(Icons.add),
+      //     backgroundColor: Colors.white60,
+      //   ),
+      //
+      // )
     );
   }
 }
