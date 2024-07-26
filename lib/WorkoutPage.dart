@@ -89,12 +89,12 @@ class _WorkoutState extends State<Workout> {
           ),
         ],
       ),
-      Expanded(
+      /*Expanded(
         child: ListView.builder(
           itemCount: exercise.length,
             itemBuilder: (context, index){
               final exercise = exercises[index];
-            return const Column(
+            return  Column(
                 children: [
                   Row(
                     children: [
@@ -107,8 +107,9 @@ class _WorkoutState extends State<Workout> {
                 ],
              ),
          },
+        ),
         );
-      ),
+
       Padding(
         padding: const EdgeInsets.all(8.0),
         child: FloatingActionButton.extended(
@@ -121,15 +122,15 @@ class _WorkoutState extends State<Workout> {
         ),
       ),
 
-      // Expanded(
-      //   child:FloatingActionButton.extended(
-      //     onPressed: () {},
-      //     label: const Text('Add Exercise'),
-      //     icon: Icon(Icons.add),
-      //     backgroundColor: Colors.white60,
-      //   ),
-      //
-      // )
+       Expanded(
+       child:FloatingActionButton.extended(
+           onPressed: () {},
+           label: const Text('Add Exercise'),
+           icon: Icon(Icons.add),
+           backgroundColor: Colors.white60,
+         ),
+
+       )*/
     );
   }
 }
