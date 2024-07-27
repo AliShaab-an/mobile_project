@@ -19,13 +19,13 @@ class _BMICalculatorScreenState extends State<BMICalculatorScreen> {
     final age = int.tryParse(_ageController.text) ?? 0;
 
     if (heightCm > 0 && weight > 0 && age > 0 && _selectedGender != null) {
-      // Convert height from cm to meters
+
       final heightM = heightCm / 100;
 
-      // BMI Calculation
+
       final bmi = weight / (heightM * heightM);
 
-      // BMR Calculation
+
       double bmr;
       if (_selectedGender == 'male') {
         bmr = 10 * weight + 6.25 * heightCm - 5 * age + 5;
@@ -52,9 +52,9 @@ class _BMICalculatorScreenState extends State<BMICalculatorScreen> {
     final screenHeight = mediaQuery.size.height;
     final isPortrait = mediaQuery.orientation == Orientation.portrait;
 
-    // Adjust font size and spacing based on screen width
-    double fontSize = screenWidth * 0.05; // 5% of screen width
-    double padding = screenWidth * 0.04; // 4% of screen width
+
+    double fontSize = screenWidth * 0.05;
+    double padding = screenWidth * 0.0;
 
     return Scaffold(
       backgroundColor: Colors.grey[850],
@@ -63,25 +63,25 @@ class _BMICalculatorScreenState extends State<BMICalculatorScreen> {
         backgroundColor: Colors.lightGreenAccent[400],
       ),
       body: Padding(
-        padding: EdgeInsets.all(padding),
+        padding: EdgeInsets.all(30),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             _buildTextField(_heightController, 'Height (cm)', fontSize),
-            SizedBox(height: padding),
+            SizedBox(height: 20),
             _buildTextField(_weightController, 'Weight (kg)', fontSize),
-            SizedBox(height: padding),
+            SizedBox(height: 20),
             _buildTextField(_ageController, 'Age (years)', fontSize),
-            SizedBox(height: padding),
+            SizedBox(height: 20),
             _buildGenderSelection(fontSize),
-            SizedBox(height: padding),
+            SizedBox(height:20),
             FloatingActionButton.extended(
               label: Text('Calculate', style: TextStyle(fontSize: fontSize)),
               icon: Icon(Icons.calculate, size: fontSize),
               backgroundColor: Colors.lightGreenAccent[400],
               onPressed: _calculateMetrics,
             ),
-            SizedBox(height: padding),
+            SizedBox(height: 20),
             Text(
               _bmi > 0
                   ? 'Your BMI is ${_bmi.toStringAsFixed(2)}\nYour BMR is ${_bmr.toStringAsFixed(2)} kcal/day'
