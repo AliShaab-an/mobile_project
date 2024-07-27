@@ -12,15 +12,10 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[850],
+      backgroundColor: Colors.black,
       appBar: AppBar(
-        backgroundColor: Colors.lightGreenAccent[400],
-        title: Text('Workout',
-        style: TextStyle(
-          fontWeight: FontWeight.w500,
-          color: Colors.grey[850],
-        ),
-        ),
+        backgroundColor: Colors.amberAccent,
+        title: Text('Workout'),
         centerTitle: true,
       ),
       body: SafeArea(
@@ -30,38 +25,26 @@ class _HomeState extends State<Home> {
             Divider(
               color: Colors.grey[400],
             ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(10,8.0,0,5.0),
-              child: Text(
-                'Quick Start',
-                style: TextStyle(
-                  fontWeight: FontWeight.w900,
-                  fontSize: 22,
-                  color: Colors.lightGreenAccent[400],
-                ),
+            Text(
+              'Quick Start',
+              style: TextStyle(
+                fontWeight: FontWeight.w900,
+                fontSize: 22,
+                color: Colors.amberAccent,
               ),
             ),
             SizedBox(
-              height: 3,
+              height: 10,
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(10.0,10,10,10),
-              child: SizedBox(
-                height: 60,
-                child: FloatingActionButton.extended(
-                  label:  Text('Start Empty Workout',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
-                    color: Colors.grey[850],
-                  ),
-                  ),
-                  icon: Icon(Icons.add),
-                  backgroundColor: Colors.lightGreenAccent[400],
-                  onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => Workout()));
-                  },
-                ),
+              child: FloatingActionButton.extended(
+                label: const Text('Start Empty Workout'),
+                icon: Icon(Icons.add),
+                backgroundColor: Colors.white60,
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => Workout()));
+                },
               ),
             ),
             SizedBox(
@@ -77,32 +60,23 @@ class _HomeState extends State<Home> {
                   fit: BoxFit.cover,
                 ),
               ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(10,8.0,0,5.0),
-              child: Text(
-                'Body Mass Index',
-                style: TextStyle(
-                  fontWeight: FontWeight.w900,
-                  fontSize: 22,
-                  color:Colors.lightGreenAccent[400],
-                ),
+            Text(
+              'Body Mass Index',
+              style: TextStyle(
+                fontWeight: FontWeight.w900,
+                fontSize: 22,
+                color: Colors.amberAccent,
               ),
             ),
             SizedBox(
-              height: 3,
+              height: 10,
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(10.0,10,10,10),
               child: FloatingActionButton.extended(
-                label:  Text('Calculate Your BMI',
-                style: TextStyle(
-                  fontWeight: FontWeight.w900,
-                  fontSize: 22,
-                  color: Colors.grey[850],
-                ),
-                ),
+                label: const Text('Claculate Your BMI'),
                 icon: Icon(Icons.calculate),
-                backgroundColor: Colors.lightGreenAccent[400],
+                backgroundColor: Colors.white60,
                 onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) => Bmi()));
                 },

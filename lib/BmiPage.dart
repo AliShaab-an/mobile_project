@@ -8,14 +8,12 @@ class Bmi extends StatelessWidget {
     return  Scaffold(
         backgroundColor: Colors.black,
         appBar: AppBar(
-        backgroundColor: Colors.lightGreenAccent[400],
+        backgroundColor: Colors.amberAccent,
         title: Text(
         'BMI Calculater',
         style:TextStyle(
-         ),
-        ),
-          centerTitle: true,
-      ),
-    );
+    ),
+    ),
+        ), );
   }
 }
