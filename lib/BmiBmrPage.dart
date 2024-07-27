@@ -57,10 +57,10 @@ class _BMICalculatorScreenState extends State<BMICalculatorScreen> {
     double padding = screenWidth * 0.04; // 4% of screen width
 
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.grey[850],
       appBar: AppBar(
         title: Text('BMI and BMR Calculator'),
-        backgroundColor: Colors.amber,
+        backgroundColor: Colors.lightGreenAccent[400],
       ),
       body: Padding(
         padding: EdgeInsets.all(padding),
@@ -78,7 +78,7 @@ class _BMICalculatorScreenState extends State<BMICalculatorScreen> {
             FloatingActionButton.extended(
               label: Text('Calculate', style: TextStyle(fontSize: fontSize)),
               icon: Icon(Icons.calculate, size: fontSize),
-              backgroundColor: Colors.white60,
+              backgroundColor: Colors.lightGreenAccent[400],
               onPressed: _calculateMetrics,
             ),
             SizedBox(height: padding),
@@ -87,7 +87,7 @@ class _BMICalculatorScreenState extends State<BMICalculatorScreen> {
                   ? 'Your BMI is ${_bmi.toStringAsFixed(2)}\nYour BMR is ${_bmr.toStringAsFixed(2)} kcal/day'
                   : 'Enter valid values and select gender',
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: fontSize, color: Colors.amberAccent),
+              style: TextStyle(fontSize: fontSize, color: Colors.lightGreenAccent[400]),
             ),
           ],
         ),
@@ -101,16 +101,16 @@ class _BMICalculatorScreenState extends State<BMICalculatorScreen> {
       keyboardType: TextInputType.numberWithOptions(decimal: true),
       decoration: InputDecoration(
         labelText: label,
-        labelStyle: TextStyle(fontSize: fontSize * 0.8, color: Colors.amberAccent),
+        labelStyle: TextStyle(fontSize: fontSize * 0.8, color: Colors.lightGreenAccent[400]),
         border: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.amberAccent),
+          borderSide: BorderSide(color: Colors.lightGreenAccent),
         ),
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.amberAccent),
+          borderSide: BorderSide(color: Colors.lightGreenAccent),
         ),
       ),
-      style: TextStyle(fontSize: fontSize, color: Colors.white),
-      cursorColor: Colors.amberAccent,
+      style: TextStyle(fontSize: fontSize, color: Colors.lightGreenAccent[400]),
+      cursorColor: Colors.lightGreenAccent[400],
     );
   }
 
@@ -118,7 +118,7 @@ class _BMICalculatorScreenState extends State<BMICalculatorScreen> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Text('Gender:', style: TextStyle(fontSize: fontSize, color: Colors.white)),
+        Text('Gender:', style: TextStyle(fontSize: fontSize, color: Colors.lightGreenAccent[400])),
         SizedBox(width: fontSize * 0.5),
         Expanded(
           child: Row(
@@ -133,7 +133,7 @@ class _BMICalculatorScreenState extends State<BMICalculatorScreen> {
                   });
                 },
               ),
-              Text('Male', style: TextStyle(fontSize: fontSize, color: Colors.white)),
+              Text('Male', style: TextStyle(fontSize: fontSize, color: Colors.lightGreenAccent[400])),
               SizedBox(width: fontSize),
               Radio<String>(
                 value: 'female',
@@ -144,7 +144,7 @@ class _BMICalculatorScreenState extends State<BMICalculatorScreen> {
                   });
                 },
               ),
-              Text('Female', style: TextStyle(fontSize: fontSize, color: Colors.white)),
+              Text('Female', style: TextStyle(fontSize: fontSize, color: Colors.lightGreenAccent[400])),
             ],
           ),
         ),
