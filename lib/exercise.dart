@@ -29,9 +29,9 @@ void getExercises(Function(bool success) update) async {
           response.body); // create dart json object from json array
 
       for (var row in jsonResponse) { // iterate over all rows in the json array
-        Exercise exercise = Exercise.fromJson(row);
-        exercises.add(
-            exercise); // add the exercise object to the exercises list
+         Exercise exercise = Exercise.fromJson(row);
+         exercises.add(
+             exercise); // add the exercise object to the exercises list
 
 
       update(
