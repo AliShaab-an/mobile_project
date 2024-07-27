@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'home.dart';
 import 'exercise.dart';
+import 'ExercisesList.dart';
+
 
 class Workout extends StatefulWidget {
   const Workout({super.key});
@@ -15,10 +16,11 @@ class _WorkoutState extends State<Workout> {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-        backgroundColor: Colors.amberAccent,
+        backgroundColor: Colors.lightGreenAccent[400],
         title: Text(
           'Log Workout',
           style:TextStyle(
+            color: Colors.grey[850],
           ),
         ),
         actions: [
@@ -27,28 +29,33 @@ class _WorkoutState extends State<Workout> {
             child: SizedBox(
               width: 60,
               height: 30,
-              child: FloatingActionButton(onPressed: (){},
-                backgroundColor: Colors.black,
-                  child: Text(
-                    'finish',
-                    style: TextStyle(
-                      color: Colors.amberAccent,
-                      fontWeight: FontWeight.normal,
-                    ),
+              child: FloatingActionButton(
+                onPressed: () {},
+                backgroundColor: Colors.lightGreenAccent[400],
+                child: Text(
+                  'Finish',
+                  style: TextStyle(
+                    color: Colors.grey[850],
+                    fontWeight: FontWeight.bold,
                   ),
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
               ),
             ),
           ),
         ],
       ),
-      body:const Column(
+      body: Column(
         children: [
           Padding(
             padding: EdgeInsets.all(8.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('volume',
+                Text(
+                  'Volume',
                   style: TextStyle(
                     color: Colors.grey,
                   ),
@@ -56,9 +63,10 @@ class _WorkoutState extends State<Workout> {
                 SizedBox(
                   width: 85,
                 ),
-                Text('Sets',
+                Text(
+                  'Sets',
                   style: TextStyle(
-                  color: Colors.grey,
+                    color: Colors.grey,
                   ),
                 ),
               ],
@@ -69,68 +77,84 @@ class _WorkoutState extends State<Workout> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('0Kg',
+                Text(
+                  '0Kg',
                   style: TextStyle(
-                    color: Colors.amberAccent,
+                    color: Colors.lightGreenAccent[400],
                     fontSize: 16,
                   ),
                 ),
                 SizedBox(
                   width: 105,
                 ),
-                Text('0',
+                Text(
+                  '0',
                   style: TextStyle(
-                    color: Colors.amberAccent,
+                    color: Colors.lightGreenAccent[400],
                     fontSize: 16,
                   ),
                 ),
               ],
             ),
           ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: exercises.length,
+              itemBuilder: (context, index) {
+                final exercise = exercises[index];
+                return Column(
+                  children: [
+                    Row(
+                      children: [
+                        CircleAvatar(
+                          backgroundImage: NetworkImage(exercise.imageUrl),
+                        ),
+                        SizedBox(width: 10),
+                        Text(
+                          exercise.name,
+                          style: TextStyle(
+                            color: Colors.lightGreenAccent[400],
+                            fontSize: 16,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Divider(color: Colors.grey),
+                  ],
+                );
+              },
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: SizedBox(
+              height: 40,
+              width: 300,
+              child: FloatingActionButton.extended(
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => exercisesList()
+                  ),
+                  );
+                },
+                label: const Text('Add Exercise',
+                style:TextStyle(
+                  fontWeight: FontWeight.bold,
+                ) ,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                icon: Icon(Icons.add),
+                backgroundColor: Colors.lightGreenAccent[400],
+              ),
+            ),
+          ),
         ],
       ),
-      /*Expanded(
-        child: ListView.builder(
-          itemCount: exercise.length,
-            itemBuilder: (context, index){
-              final exercise = exercises[index];
-            return  Column(
-                children: [
-                  Row(
-                    children: [
-                      CircleAvatar(
-                        backgroundImage:Image.network(exercise.imageurl),
-                        Text(exercise.name),
-                      )
-                    ],
-                  ),
-                ],
-             ),
-         },
-        ),
-        );
-
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: FloatingActionButton.extended(
-          onPressed: () {
-            // Navigate to add exercise page
-          },
-          label: const Text('Add Exercise'),
-          icon: Icon(Icons.add),
-          backgroundColor: Colors.white60,
-        ),
-      ),
-
-       Expanded(
-       child:FloatingActionButton.extended(
-           onPressed: () {},
-           label: const Text('Add Exercise'),
-           icon: Icon(Icons.add),
-           backgroundColor: Colors.white60,
-         ),
-
-       )*/
     );
   }
 }
+
+
+
+

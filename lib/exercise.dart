@@ -7,3 +7,5 @@ class Exercise {
       {required this.name, required this.imageUrl, required this.targetMuscle});
 
 }
+
+List <Exercise> exercises=[];
