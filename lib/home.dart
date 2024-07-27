@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'WorkoutPage.dart';
-import 'BmiPage.dart';
+import 'BmiBmrPage.dart';
 class Home extends StatefulWidget {
   const Home({super.key});
 
@@ -61,7 +61,7 @@ class _HomeState extends State<Home> {
                 ),
               ),
             Text(
-              'Body Mass Index',
+              'BMI & BMR',
               style: TextStyle(
                 fontWeight: FontWeight.w900,
                 fontSize: 22,
@@ -74,11 +74,11 @@ class _HomeState extends State<Home> {
             Padding(
               padding: const EdgeInsets.fromLTRB(10.0,10,10,10),
               child: FloatingActionButton.extended(
-                label: const Text('Claculate Your BMI'),
+                label: const Text('Claculate Your BMI & your BMR'),
                 icon: Icon(Icons.calculate),
                 backgroundColor: Colors.white60,
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => Bmi()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => BMICalculatorScreen()));
                 },
               ),
             ),
