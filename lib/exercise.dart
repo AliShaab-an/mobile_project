@@ -32,7 +32,7 @@ void getExercises(Function(bool success) update) async {
         Exercise exercise = Exercise.fromJson(row);
         exercises.add(
             exercise); // add the exercise object to the exercises list
-      }
+
 
       update(
           true); // callback update method to inform that we completed retrieving data

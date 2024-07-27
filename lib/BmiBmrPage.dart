@@ -14,47 +14,42 @@ class _BMICalculatorScreenState extends State<BMICalculatorScreen> {
   double _bmr = 0;
 
   void _calculateMetrics() {
-    final heightCm = double.tryParse(_heightController.text) ?? 0;
-    final weight = double.tryParse(_weightController.text) ?? 0;
-    final age = int.tryParse(_ageController.text) ?? 0;
+    final heightCm = double.tryParse(_heightController.text);
+    final weight = double.tryParse(_weightController.text);
+    final age = int.tryParse(_ageController.text);
 
-    if (heightCm > 0 && weight > 0 && age > 0 && _selectedGender != null) {
-
-      final heightM = heightCm / 100;
-
-
-      final bmi = weight / (heightM * heightM);
-
-
-      double bmr;
-      if (_selectedGender == 'male') {
-        bmr = 10 * weight + 6.25 * heightCm - 5 * age + 5;
-      } else {
-        bmr = 10 * weight + 6.25 * heightCm - 5 * age - 161;
-      }
-
-      setState(() {
-        _bmi = bmi;
-        _bmr = bmr;
-      });
-    } else {
+    if (heightCm == null || weight == null || age == null || heightCm <= 0 || weight <= 0 || age <= 0 || _selectedGender == null) {
       setState(() {
         _bmi = 0;
         _bmr = 0;
       });
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Please enter valid values for all fields and select a gender')),
+      );
+      return;
     }
+
+    final heightM = heightCm / 100;
+    final bmi = weight / (heightM * heightM);
+
+    double bmr;
+    if (_selectedGender == 'male') {
+      bmr = 10 * weight + 6.25 * heightCm - 5 * age + 5;
+    } else {
+      bmr = 10 * weight + 6.25 * heightCm - 5 * age - 161;
+    }
+
+    setState(() {
+      _bmi = bmi;
+      _bmr = bmr;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
     final screenWidth = mediaQuery.size.width;
-    final screenHeight = mediaQuery.size.height;
-    final isPortrait = mediaQuery.orientation == Orientation.portrait;
-
-
-    double fontSize = screenWidth * 0.05;
-    double padding = screenWidth * 0.0;
+    final fontSize = screenWidth * 0.05;
 
     return Scaffold(
       backgroundColor: Colors.grey[850],
@@ -74,13 +69,6 @@ class _BMICalculatorScreenState extends State<BMICalculatorScreen> {
             _buildTextField(_ageController, 'Age (years)', fontSize),
             SizedBox(height: 20),
             _buildGenderSelection(fontSize),
-            SizedBox(height:20),
-            FloatingActionButton.extended(
-              label: Text('Calculate', style: TextStyle(fontSize: fontSize)),
-              icon: Icon(Icons.calculate, size: fontSize),
-              backgroundColor: Colors.lightGreenAccent[400],
-              onPressed: _calculateMetrics,
-            ),
             SizedBox(height: 20),
             Text(
               _bmi > 0
@@ -88,6 +76,13 @@ class _BMICalculatorScreenState extends State<BMICalculatorScreen> {
                   : 'Enter valid values and select gender',
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: fontSize, color: Colors.lightGreenAccent[400]),
+            ),
+            SizedBox(height: 20),
+            FloatingActionButton.extended(
+              label: Text('Calculate', style: TextStyle(fontSize: fontSize)),
+              icon: Icon(Icons.calculate, size: fontSize),
+              backgroundColor: Colors.lightGreenAccent[400],
+              onPressed: _calculateMetrics,
             ),
           ],
         ),
@@ -116,13 +111,11 @@ class _BMICalculatorScreenState extends State<BMICalculatorScreen> {
 
   Widget _buildGenderSelection(double fontSize) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Text('Gender:', style: TextStyle(fontSize: fontSize, color: Colors.lightGreenAccent[400])),
         SizedBox(width: fontSize * 0.5),
         Expanded(
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Radio<String>(
                 value: 'male',
