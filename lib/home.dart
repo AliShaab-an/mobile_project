@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'WorkoutPage.dart';
-import 'BmiPage.dart';
+import 'BmiBmrPage.dart';
+
+
 class Home extends StatefulWidget {
   const Home({super.key});
 
@@ -78,7 +80,7 @@ class _HomeState extends State<Home> {
                 icon: Icon(Icons.calculate),
                 backgroundColor: Colors.white60,
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => Bmi()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => BMICalculatorScreen()));
                 },
               ),
             ),
