@@ -27,12 +27,15 @@ class _HomeState extends State<Home> {
             Divider(
               color: Colors.grey[400],
             ),
-            Text(
-              'Quick Start',
-              style: TextStyle(
-                fontWeight: FontWeight.w900,
-                fontSize: 22,
-                color: Colors.lightGreenAccent[400],
+            Padding(
+              padding: const EdgeInsets.fromLTRB(10,8.0,0,0),
+              child: Text(
+                'Quick Start',
+                style: TextStyle(
+                  fontWeight: FontWeight.w900,
+                  fontSize: 22,
+                  color: Colors.lightGreenAccent[400],
+                ),
               ),
             ),
             SizedBox(
@@ -41,7 +44,12 @@ class _HomeState extends State<Home> {
             Padding(
               padding: const EdgeInsets.fromLTRB(10.0,10,10,10),
               child: FloatingActionButton.extended(
-                label: const Text('Start Empty Workout'),
+                label: Text('Start Empty Workout',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.grey[850],
+                ),
+                ),
                 icon: Icon(Icons.add),
                 backgroundColor: Colors.lightGreenAccent[400],
                 onPressed: () {
@@ -62,28 +70,36 @@ class _HomeState extends State<Home> {
                   fit: BoxFit.cover,
                 ),
               ),
-            Text(
-              'Body Mass Index',
-              style: TextStyle(
-                fontWeight: FontWeight.w900,
-                fontSize: 22,
-                color: Colors.lightGreenAccent[400],
+            Padding(
+              padding: const EdgeInsets.fromLTRB(10.0,10,10,10),
+              child: Text(
+                'Body Mass Index',
+                style: TextStyle(
+                  fontWeight: FontWeight.w900,
+                  fontSize: 22,
+                  color: Colors.lightGreenAccent[400],
+                ),
               ),
             ),
             SizedBox(
               height: 10,
             ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(10.0,10,10,10),
-              child: FloatingActionButton.extended(
-                label: const Text('Claculate Your BMI'),
-                icon: Icon(Icons.calculate),
-                backgroundColor: Colors.lightGreenAccent[400],
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => BMICalculatorScreen()));
-                },
+            FloatingActionButton.extended(
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => BMICalculatorScreen()));
+              },
+              backgroundColor: Colors.lightGreenAccent[400],
+              icon: Icon(Icons.calculate),
+              label:  Padding(
+                padding: const EdgeInsets.fromLTRB(10.10,10,10,10),
+                child: Text('Claculate Your BMI',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.grey[850],
+                ),
+                ),
               ),
-            ),
+                        ),
             SizedBox(
               height: 15,
             ),

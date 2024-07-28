@@ -14,13 +14,14 @@ class _WorkoutState extends State<Workout> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.grey[850],
       appBar: AppBar(
         backgroundColor: Colors.lightGreenAccent[400],
         title: Text(
           'Log Workout',
           style:TextStyle(
             color: Colors.grey[850],
+            fontWeight: FontWeight.bold,
           ),
         ),
         actions: [
@@ -136,9 +137,10 @@ class _WorkoutState extends State<Workout> {
                   ),
                   );
                 },
-                label: const Text('Add Exercise',
+                label: Text('Add Exercise',
                 style:TextStyle(
                   fontWeight: FontWeight.bold,
+                  color: Colors.grey[850],
                 ) ,
                 ),
                 shape: RoundedRectangleBorder(

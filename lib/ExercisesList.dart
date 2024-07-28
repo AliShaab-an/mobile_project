@@ -11,15 +11,41 @@ class exercisesList extends StatefulWidget {
 
 class _exercisesListState extends State<exercisesList> {
   TextEditingController _controllerName = TextEditingController();
+
+  bool _load = false;
+
+  void update(bool success) {
+    setState(() {
+      _load = true;
+      if (!success) {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('failed to load data')));
+      }
+    });
+  }
+
+
+  @override
+  void initState() {
+    getExercise(update);
+    super.initState();
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[850],
       appBar: AppBar(
         backgroundColor: Colors.lightGreenAccent[400],
-        title: Text('Add Exercise'),
         centerTitle: true,
+        title: Text('Add Exercise',
+        style: TextStyle(
+        color: Colors.grey[850],
+        fontWeight: FontWeight.bold,
+        ),
       ),
+    ),
       body: Center(
         child: Column(
           children: [
