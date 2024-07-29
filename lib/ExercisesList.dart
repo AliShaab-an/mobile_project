@@ -112,14 +112,14 @@ class _exercisesListState extends State<exercisesList> {
                           children: [
                             Text(
                               exercise.name,
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: 25,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.amberAccent,
+                                color: Colors.lightGreenAccent[400],
                               ),
                             ),
                             Text(
-                              exercise.targetMuscle,
+                              exercise.muscleTarget,
                               style: const TextStyle(
                                 color: Colors.grey,
                                 fontSize: 14,

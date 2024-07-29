@@ -1,20 +1,20 @@
 import 'dart:convert' as convert;
 import 'package:http/http.dart' as http;
 
-String _baseURL = 'localhost';
+String _baseURL = 'gymrat.sportsontheweb.net';
 
 class Exercise {
-  int id;
+  int eid;
   String name;
   String imageUrl;
-  String targetMuscle;
+  String muscleTarget;
 
   Exercise(
-      {required this.id, required this.name, required this.imageUrl, required this.targetMuscle});
+      {required this.eid, required this.name, required this.imageUrl, required this.muscleTarget});
 
   @override
   String toString() {
-    return 'Exercise{id: $id, name: $name, imageUrl: $imageUrl, targetMuscle: $targetMuscle}';
+    return 'Exercise{id: $eid, name: $name, imageUrl: $imageUrl, targetMuscle: $muscleTarget}';
   }
 }
 
@@ -22,7 +22,7 @@ List<Exercise> exercises = [];
 
 void getExercise(Function(bool success) update) async {
   try {
-    final url = Uri.http(_baseURL, 'mycompany/getProducts.php');
+    final url = Uri.http(_baseURL, '4510049_exercises/GetExercises.php');
     final response = await http.get(url).timeout(const Duration(seconds: 5)); // max timeout 5 seconds
 
     exercises.clear(); // clear old exercises
@@ -31,10 +31,10 @@ void getExercise(Function(bool success) update) async {
       final jsonResponse = convert.jsonDecode(response.body); // create dart json object from json array
       for (var row in jsonResponse) { // iterate over all rows in the json array
         Exercise x = Exercise( // create a Exercise object from JSON row object
-            id: int.parse(row['id']),
+            eid: int.parse(row['id']),
             name: row['name'],
             imageUrl: row['imageUrl'],
-            targetMuscle: row['targetMuscle']);
+            muscleTarget: row['targetMuscle']);
         exercises.add(x); // add the exercise object to the exercises list
       }
       update(true); // callback update method to inform that we completed retrieving data
@@ -49,7 +49,7 @@ void getExercise(Function(bool success) update) async {
 
 void getExerciseByName(Function(String text) update, String name) async {
   try {
-    final url = Uri.http(_baseURL, 'mycompany/getProductByID.php', {'name': name});
+    final url = Uri.http(_baseURL, '4510049_exercises/GetExercisesByName.php', {'name': name});
     final response = await http.get(url).timeout(const Duration(seconds: 5)); // max timeout 5 seconds
 
     if (response.statusCode == 200) { // if successful call
@@ -59,10 +59,10 @@ void getExerciseByName(Function(String text) update, String name) async {
       } else {
         for (var row in jsonResponse) { // iterate over all rows in the json array, there should be at most one exercise as name is unique
           Exercise x = Exercise(
-              id: int.parse(row['id']),
+              eid: int.parse(row['id']),
               name: row['name'],
               imageUrl: row['imageUrl'],
-              targetMuscle: row['targetMuscle']);
+              muscleTarget: row['targetMuscle']);
           update(x.toString()); // callback update method to inform that we completed retrieving data
           break;
         }
