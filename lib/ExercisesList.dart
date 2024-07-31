@@ -18,7 +18,12 @@ class _exercisesListState extends State<exercisesList> {
     setState(() {
       _load = true;
       if (!success) {
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('failed to load data')));
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('failed to load data',
+        style: TextStyle(
+          color: Colors.lightGreenAccent[400],
+        ),
+        )
+        ));
       }
     });
   }
@@ -99,7 +104,8 @@ class _exercisesListState extends State<exercisesList> {
                 itemCount: exercises.length,
                 itemBuilder: (context, index) {
                   final exercise = exercises[index];
-                  return Padding(
+                  return
+                    Padding(
                     padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
                     child: Row(
                       children: [
@@ -120,8 +126,8 @@ class _exercisesListState extends State<exercisesList> {
                             ),
                             Text(
                               exercise.muscleTarget,
-                              style: const TextStyle(
-                                color: Colors.grey,
+                              style: TextStyle(
+                                color: Colors.lightGreenAccent[400],
                                 fontSize: 14,
                               ),
                             ),
