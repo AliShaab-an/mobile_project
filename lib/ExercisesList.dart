@@ -1,41 +1,54 @@
 import 'package:flutter/material.dart';
 import 'exercise.dart';
-import 'WorkoutPage.dart';
 
-class exercisesList extends StatefulWidget {
-  const exercisesList({super.key});
+class ExercisesList extends StatefulWidget {
+  const ExercisesList({super.key});
 
   @override
-  State<exercisesList> createState() => _exercisesListState();
+  State<ExercisesList> createState() => _ExercisesListState();
 }
 
-class _exercisesListState extends State<exercisesList> {
+class _ExercisesListState extends State<ExercisesList> {
   TextEditingController _controllerName = TextEditingController();
-
   bool _load = false;
+  List<Exercise> _exercises = [];
+  List<Exercise> _filteredExercises = []; // List to hold filtered exercises
+
+  @override
+  void initState() {
+    super.initState();
+    getExercise(update);
+  }
 
   void update(bool success) {
     setState(() {
       _load = true;
       if (!success) {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('failed to load data',
-        style: TextStyle(
-          color: Colors.lightGreenAccent[400],
-        ),
-        )
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text(
+            'Failed to load data',
+            style: TextStyle(
+              color: Colors.lightGreenAccent[400],
+            ),
+          ),
         ));
+      } else {
+        // Assuming getExercise sets the list of exercises
+        _exercises = exercises; // Replace with actual exercise data
+        _filteredExercises = _exercises;
       }
     });
   }
 
+  void filterExercises(String query) {
+    List<Exercise> filteredList = _exercises.where((exercise) {
+      return exercise.name.toLowerCase().contains(query.toLowerCase());
+    }).toList();
 
-  @override
-  void initState() {
-    getExercise(update);
-    super.initState();
+    setState(() {
+      _filteredExercises = filteredList;
+    });
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -44,13 +57,14 @@ class _exercisesListState extends State<exercisesList> {
       appBar: AppBar(
         backgroundColor: Colors.lightGreenAccent[400],
         centerTitle: true,
-        title: Text('Add Exercise',
-        style: TextStyle(
-        color: Colors.grey[850],
-        fontWeight: FontWeight.bold,
+        title: Text(
+          'Add Exercise',
+          style: TextStyle(
+            color: Colors.grey[850],
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
-    ),
       body: Center(
         child: Column(
           children: [
@@ -61,6 +75,7 @@ class _exercisesListState extends State<exercisesList> {
                 padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                 child: TextField(
                   controller: _controllerName,
+                  onChanged: filterExercises,
                   keyboardType: TextInputType.text,
                   style: TextStyle(
                     color: Colors.lightGreenAccent[400],
@@ -101,39 +116,48 @@ class _exercisesListState extends State<exercisesList> {
             ),
             Expanded(
               child: ListView.builder(
-                itemCount: exercises.length,
+                itemCount: _filteredExercises.length,
                 itemBuilder: (context, index) {
-                  final exercise = exercises[index];
-                  return
-                    Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-                    child: Row(
-                      children: [
-                        CircleAvatar(
-                          backgroundImage: NetworkImage(exercise.imageUrl),
-                        ),
-                        const SizedBox(width: 16.0),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              exercise.name,
-                              style: TextStyle(
-                                fontSize: 25,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.lightGreenAccent[400],
-                              ),
+                  final exercise = _filteredExercises[index];
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context, exercise);
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 8.0, horizontal: 16.0),
+                      child: Row(
+                        children: [
+                          Hero(
+                            tag: 'exercise-image-$index',
+                            child: CircleAvatar(
+                              backgroundImage: NetworkImage(exercise.imageUrl),
                             ),
-                            Text(
-                              exercise.muscleTarget,
-                              style: TextStyle(
-                                color: Colors.lightGreenAccent[400],
-                                fontSize: 14,
+                          ),
+                          const SizedBox(width: 16.0),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                exercise.name,
+                                style: TextStyle(
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.lightGreenAccent[400],
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                      ],
+                              Text(
+                                exercise.muscleTarget,
+                                style: TextStyle(
+                                  color: Colors.lightGreenAccent[400],
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   );
                 },
